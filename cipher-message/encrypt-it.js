@@ -4,28 +4,17 @@
 (function() {
   "use strict";
 
-  /**
-   * The starting point in our program, setting up a listener
-   * for the "load" event on the window, signalling the HTML DOM has been constructed
-   * on the page. When this event occurs, the attached function (init) will be called.
-   */
   window.addEventListener("load", init);
-
-  /**
-   * TODO: Write a function comment using JSDoc.
-   */
   function init() {
-    // Note: In this function, we usually want to set up our event handlers
-    // for UI elements on the page.
     console.log("Window loaded!");
+    // event listeners  for buttons encrypt and reset
     document.getElementById('encrypt-it').addEventListener('click', handleEncrypt);
     document.getElementById('reset').addEventListener('click', handleReset);
-
   }
 
-  // 
+  // takes value from input-text area to run it through shiftCipher
+  // assigns output string to result text area
   function handleEncrypt(){
-    console.log(document.getElementById('input-text').value);
     const output = shiftCipher(document.getElementById('input-text').value);
     document.getElementById('result').textContent = output;
   }
@@ -38,19 +27,21 @@
     let output = "";
 
     for(let i = 0;i < text.length;i++){
-
-
+      // shift text only if it is a part of the alphabet
       if (text[i] < 'a' || text[i] > 'z') {
         output += text[i];
       }
-
+      // z will equal a
       else if(text[i] == 'z'){
         output += 'a'
       }
+      // text is a part of the alphabet so shift the text characters by one
       else{
         // get the ascii value for the next char in the string
         let asciiNum = text.charCodeAt(i);
+        // shift one letter
         asciiNum = asciiNum + 1;
+        // shiftedChar is the new character
         let shiftedChar = String.fromCharCode(asciiNum);
         output += shiftedChar;
       }
@@ -64,8 +55,5 @@
     document.getElementById('input-text').value = "";
   }
 
-  // Add any other functions in this area (you should not implement your
-  // entire program in the init function, for similar reasons that
-  // you shouldn't write an entire Java program in the main method).
 
 })();
