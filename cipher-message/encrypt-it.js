@@ -18,14 +18,45 @@
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
     console.log("Window loaded!");
-    document.getElementById('encrypt-it').addEventListener('click', handleClick);
+    document.getElementById('encrypt-it').addEventListener('click', handleEncrypt);
     document.getElementById('reset').addEventListener('click', handleReset);
 
   }
 
   // 
-  function handleClick(){
-    console.log("Button clicked!");
+  function handleEncrypt(){
+    console.log(document.getElementById('input-text').value);
+    const output = shiftCipher(document.getElementById('input-text').value);
+    document.getElementById('result').textContent = output;
+  }
+
+  // shifts a all string characters to the next letter
+  // example: a would turn into b
+  //          m would turn into n
+  function shiftCipher(text){
+    text = text.toLowerCase();
+    let output = "";
+
+    for(let i = 0;i < text.length;i++){
+
+
+      if (text[i] < 'a' || text[i] > 'z') {
+        output += text[i];
+      }
+
+      else if(text[i] == 'z'){
+        output += 'a'
+      }
+      else{
+        // get the ascii value for the next char in the string
+        let asciiNum = text.charCodeAt(i);
+        asciiNum = asciiNum + 1;
+        let shiftedChar = String.fromCharCode(asciiNum);
+        output += shiftedChar;
+      }
+    }
+
+    return output;
   }
 
   // changes input-text to a blank string
