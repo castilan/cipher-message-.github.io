@@ -1,6 +1,6 @@
-/*
- * Starter file 
- */
+// encript-it.js
+// Angelina Castillo
+
 (function() {
   "use strict";
 
@@ -17,6 +17,20 @@
   function init() {
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
+    console.log("Window loaded!");
+    document.getElementById('encrypt-it').addEventListener('click', handleClick);
+    document.getElementById('reset').addEventListener('click', handleReset);
+
+  }
+
+  // 
+  function handleClick(){
+    console.log("Button clicked!");
+  }
+
+  // changes input-text to a blank string
+  function handleReset(){
+    document.getElementById('input-text').value = "";
   }
 
   // Add any other functions in this area (you should not implement your
